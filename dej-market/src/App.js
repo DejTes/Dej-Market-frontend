@@ -5,6 +5,8 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
 import ProductScreen from "./screens/ProductScreen";
+import Services from "./components/Services";
+import './index.css'
 
 const App = () => {
   return (
@@ -18,8 +20,10 @@ const App = () => {
           <Route path='/product/:id' element={<ProductScreen/>} />
           
       </Routes>
+     
         </Container>
       </main>
+      <Services />
       <Footer />
     </Router>
   );
