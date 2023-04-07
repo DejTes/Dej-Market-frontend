@@ -1,20 +1,28 @@
-import React from 'react'
-import {Container} from 'react-bootstrap'
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { Container } from "react-bootstrap";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import HomeScreen from "./screens/HomeScreen";
+import ProductScreen from "./screens/ProductScreen";
 
-const App =  () => {
+const App = () => {
   return (
-  <>
-  < Navbar />
- <main className='py-4'>
-  <Container>
-  <h1>Dej-Market</h1>
-  </Container>
-  </main>
-  <Footer />
-  </>
+    <Router>
+      <Navbar />
+      <main className="py-4">
+        <Container>
+      <Routes>
+      
+          <Route path='/' element={<HomeScreen/>} exact />
+          <Route path='/product/:id' element={<ProductScreen/>} />
+          
+      </Routes>
+        </Container>
+      </main>
+      <Footer />
+    </Router>
   );
-}
+};
 
 export default App;
