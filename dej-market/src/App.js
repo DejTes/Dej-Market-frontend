@@ -4,8 +4,12 @@ import { Container } from "react-bootstrap";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomeScreen from "./screens/HomeScreen";
+import CartScreen from "./screens/CartScreen";
+import LoginScreen from "./screens/LoginScreen";
+import RegisterScreen from "./screens/RegisterScreen";
 import ProductScreen from "./screens/ProductScreen";
 import Services from "./components/Services";
+
 import './index.css'
 
 const App = () => {
@@ -15,9 +19,12 @@ const App = () => {
       <main className="py-4">
         <Container>
       <Routes>
-      
+
+          <Route path='/login' element={<LoginScreen/>} />
+          <Route path='/register' element={<RegisterScreen/>} />
           <Route path='/' element={<HomeScreen/>} exact />
           <Route path='/product/:id' element={<ProductScreen/>} />
+          <Route path='/Cart/:id?' element={<CartScreen/>} />
           
       </Routes>
      
@@ -25,6 +32,7 @@ const App = () => {
       </main>
       <Services />
       <Footer />
+     
     </Router>
   );
 };
