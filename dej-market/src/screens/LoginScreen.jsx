@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useNavigate, useLocation} from 'react-router-dom'
 import { Form, Button, Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
@@ -21,9 +21,11 @@ const LoginScreen = ({location}) => {
 
   useEffect(() => {
     if (userInfo) {
-      navigate(redirect)
+      // navigate(redirect)
+      navigate('/shipping')
     }
   }, [navigate, userInfo, redirect])
+  // }, [navigate, userInfo, redirect])
 
   const submitHandler = (e) => {
     e.preventDefault()
