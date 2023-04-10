@@ -1,4 +1,49 @@
 
+
+
+// import React, { useEffect } from 'react';
+// import { Link, useParams } from 'react-router-dom';
+// import {
+//   Row,
+//   Col,
+//   ListGroup,
+//   Image,
+//   Card,
+// } from 'react-bootstrap';
+// import { useDispatch, useSelector } from 'react-redux';
+// import Message from '../components/Message';
+// import Loader from '../components/Loader';
+// import { getOrderDetails } from '../actions/orderActions';
+
+
+
+// const OrderScreen = ({match}) => {
+//     // const orderId = match.params.id
+// const { id: orderId } = useParams();
+
+//   const dispatch = useDispatch();
+// //   const { id } = useParams();
+
+// const orderDetails = useSelector((state) => state.orderDetails);
+// const { order, loading, error } = orderDetails;
+
+// if(!loading) {
+//     const roundDecimals = (num) => {
+//         return (Math.round(num * 100) / 100).toFixed(2)
+//       }
+      
+    
+//         order.itemsPrice = roundDecimals(
+//       order.orderItems.reduce((acc, item) => acc + item.price * item.count, 0)
+//           )
+
+// }
+
+// useEffect(() => {
+// dispatch(getOrderDetails(orderId))
+// }, [dispatch, orderId]);
+
+
 import axios from 'axios'
 
 import React, { useEffect, useState, useMemo } from 'react';
@@ -194,7 +239,7 @@ const OrderScreen = ({ match }) => {
                 </Row>
               </ListGroup.Item>
               
-              {!order.isPaid && (
+              {/* {!order.isPaid && (
                 <ListGroup.Item>
                     {loadingPay && <Loader />}
                     {!sdkReady ? <Loader /> :(
@@ -203,7 +248,7 @@ const OrderScreen = ({ match }) => {
                     )}
 
                 </ListGroup.Item>
-              )}
+              )} */}
 {/* {!order.isPaid && (
     <ListGroup.Item>
         {!sdkReady ? null : (
