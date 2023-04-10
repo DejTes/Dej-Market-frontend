@@ -1,13 +1,16 @@
 import React, { useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { Button, Row, Col, ListGroup, Image, Card, ListGroupItem } from 'react-bootstrap'
+import { Link, useNavigate } from 'react-router-dom'
+import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Message from '../components/Message'
 import CheckoutSteps from '../components/Checkout'
+import { createOrder } from '../actions/orderActions'
+
 
 
 const PlaceOrderScreen = () => {
     const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     const cart = useSelector((state) => state.cart)
 
@@ -17,26 +20,81 @@ const PlaceOrderScreen = () => {
         return (Math.round(num * 100) / 100).toFixed(2)
       }
 
-      cart.itemsPrice = roundDecimals(
-        cart.cartItems.reduce((acc, item) => acc + item.price * item.count, 0)
-      )
+//   cart.itemsPrice = roundDecimals(
+//   cart.cartItems.reduce((acc, item) => acc + item.price * item.count, 0)
+//       )
 
-// shipping price
-cart.shippingPrice =roundDecimals(cart.itemsPrice > 100 ? 0 : 100)
-  cart.taxPrice = roundDecimals(Number((0.10 * cart.itemsPrice).toFixed(2)))
+// // shipping price
+// cart.shippingPrice =roundDecimals(cart.itemsPrice > 100 ? 0 : 100)
+//   cart.taxPrice = roundDecimals(Number((0.10 * cart.itemsPrice).toFixed(2)))
 
-//total price
-cart.totalPrice = (
-    Number(cart.itemsPrice) +
-    Number(cart.shippingPrice) +
-    Number(cart.taxPrice)
-  ).toFixed(2)
+// //total price
+// cart.totalPrice = (
+//     Number(cart.itemsPrice) +
+//     Number(cart.shippingPrice) +
+//     Number(cart.taxPrice)
+//   ).toFixed(2)
+
+const calculatedPrices = {
+  itemsPrice: roundDecimals(
+    cart.cartItems.reduce((acc, item) => acc + item.price * item.count, 0)
+  ),
+  shippingPrice: 0,
+  taxPrice: 0,
+  totalPrice: 0,
+};
+
+calculatedPrices.shippingPrice = roundDecimals(calculatedPrices.itemsPrice > 100 ? 0 : 100);
+calculatedPrices.taxPrice = roundDecimals(Number((0.10 * calculatedPrices.itemsPrice).toFixed(2)));
+
+calculatedPrices.totalPrice = (
+  Number(calculatedPrices.itemsPrice) +
+  Number(calculatedPrices.shippingPrice) +
+  Number(calculatedPrices.taxPrice)
+).toFixed(2);
 
 
+
+
+  const orderCreate = useSelector((state) => state.orderCreate)
+  const { order, success, error } = orderCreate
+
+  useEffect(() => {
+    if (success) {
+      navigate(`/order/${order._id}`)
+      // dispatch({ type: USER_DETAILS_RESET })
+      // dispatch({ type: ORDER_CREATE_RESET })
+    }
+    // eslint-disable-next-line
+  }, [navigate, success])
+
+
+
+
+// const placeOrderHandler = () => {
+//     dispatch(createOrder({
+//       orderItems: cart.cartItems,
+//         shippingAddress: cart.shippingAddress,
+//         paymentMethod: cart.paymentMethod,
+//         itemsPrice: cart.itemsPrice,
+//         shippingPrice: cart.shippingPrice,
+//         taxPrice: cart.taxPrice,
+//         totalPrice: cart.totalPrice,
+//     }))
+// }
 
 const placeOrderHandler = () => {
-    console.log("order")
+  dispatch(createOrder({
+    orderItems: cart.cartItems, 
+    shippingAddress: cart.shippingAddress,
+    paymentMethod: cart.paymentMethod,
+    itemsPrice: calculatedPrices.itemsPrice,
+    shippingPrice: calculatedPrices.shippingPrice,
+    taxPrice: calculatedPrices.taxPrice,
+    totalPrice: calculatedPrices.totalPrice,
+  }))
 }
+
 
   return (
    <>
@@ -105,29 +163,29 @@ const placeOrderHandler = () => {
               <ListGroup.Item>
                 <Row>
                   <Col>Items</Col>
-                  <Col>${cart.itemsPrice}</Col>
+                  <Col>${calculatedPrices.itemsPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Shipping</Col>
-                  <Col>${cart.shippingPrice}</Col>
+                  <Col>${calculatedPrices.shippingPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Tax</Col>
-                  <Col>${cart.taxPrice}</Col>
+                  <Col>${calculatedPrices.taxPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
                 <Row>
                   <Col>Total</Col>
-                  <Col>${cart.totalPrice}</Col>
+                  <Col>${calculatedPrices.totalPrice}</Col>
                 </Row>
               </ListGroup.Item>
               <ListGroup.Item>
-                {<Message variant='danger'></Message>}
+                {error && <Message variant='danger'>{error}</Message>}
               </ListGroup.Item>
               <ListGroup.Item>
                 <Button

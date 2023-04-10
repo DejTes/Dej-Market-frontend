@@ -12,7 +12,7 @@ import {
   userDetailsReducer,
   userUpdateProfileReducer
 } from './reducers/userReducers';
-
+import { orderCreateReducer, orderDetailsReducer, orderPayReducer} from './reducers/orderReducers';
 
 const reducer = {
   productList: productListReducer,
@@ -21,7 +21,10 @@ const reducer = {
   userLogin: userLoginReducer,
   userRegister: userRegisterReducer,
   userDetails: userDetailsReducer,
-  userUpdateProfile: userDetailsReducer,
+  userUpdateProfile: userUpdateProfileReducer,
+  orderCreate: orderCreateReducer,
+  orderDetails: orderDetailsReducer,
+  orderPay: orderPayReducer,
 };
 
 
