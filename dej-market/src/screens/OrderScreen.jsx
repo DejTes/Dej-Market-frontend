@@ -239,7 +239,7 @@ const OrderScreen = ({ match }) => {
                 </Row>
               </ListGroup.Item>
               
-              {/* {!order.isPaid && (
+              {!order.isPaid && (
                 <ListGroup.Item>
                     {loadingPay && <Loader />}
                     {!sdkReady ? <Loader /> :(
@@ -248,7 +248,7 @@ const OrderScreen = ({ match }) => {
                     )}
 
                 </ListGroup.Item>
-              )} */}
+              )}
 {/* {!order.isPaid && (
     <ListGroup.Item>
         {!sdkReady ? null : (
