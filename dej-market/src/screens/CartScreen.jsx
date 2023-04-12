@@ -113,6 +113,12 @@ const CartScreen = () => {
                             Proceed To Checkout
                         </Button>
                     </ListGroup.Item>
+                    
+                    <ListGroup.Item>
+
+                    <Link className='btn' to='/'>KEEP SHOPPING</Link>
+                    </ListGroup.Item>
+                   
                 </ListGroup>
             </Card>
       </Col>

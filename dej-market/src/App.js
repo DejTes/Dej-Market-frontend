@@ -20,6 +20,7 @@ import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
 import Services from "./components/Services";
 
+
 import './index.css'
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
     <Router>
       <Navbar />
       <main className="py-4">
+     
         <Container>
       <Routes>
 
@@ -38,6 +40,7 @@ const App = () => {
           <Route path='/register' element={<RegisterScreen/>} />
           <Route path='/profile' element={<ProfileScreen/>} />
           <Route path='/' element={<HomeScreen/>} exact />
+          <Route path='/search/:keyword' element={<HomeScreen/>}  />
           <Route path='/product/:id' element={<ProductScreen/>} />
           <Route path='/cart/:id?' element={<CartScreen/>} />
           <Route path='/admin/user/:id/edit' element={<UserEditScreen/>} />
@@ -58,3 +61,5 @@ const App = () => {
 };
 
 export default App;
+
+

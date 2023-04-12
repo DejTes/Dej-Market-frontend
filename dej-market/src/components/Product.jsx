@@ -11,6 +11,7 @@ const Product = ({ product}) => {
       <Link to={`/product/${product._id}`}>
         <Card.Img src={product.image} variant='top' /></Link>
         
+       {/* <Card.Text as='h5'>{product.category}</Card.Text> */}
         <Card.Body>
         <Link to={`/product/${product._id}`}>
           <Card.Title as='div'>
@@ -29,7 +30,7 @@ const Product = ({ product}) => {
           </div>
         </Card.Text>
 
-        <Card.Text as='h3'>${product.price}</Card.Text>
+        <Card.Text as='h4'>${product.price}</Card.Text>
       </Card.Body>
 
 

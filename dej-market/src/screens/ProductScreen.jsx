@@ -1,11 +1,9 @@
 
 import React, {useState, useEffect} from 'react'
 import { useParams, useNavigate} from 'react-router-dom';
-
-// import axios from 'axios'
 import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
-import { Row, Col, Image, ListGroup, Card, Button, ListGroupItem, Form } from 'react-bootstrap'
+import { Row, Col, Image, ListGroup, Card, Button,Form } from 'react-bootstrap'
 import Rating from '../components/Rating'
 import Loader from '../components/Loader';
 import Message from '../components/Message';
@@ -34,7 +32,6 @@ const ProductScreen = () => {
 
     return (
         <>
-            <Link className='btn btn-dark my-3' to='/'>Go Back</Link>
 
             {loading ? ( <Loader/> ) : error ? <Message variant='danger' >{error}</Message> : (
 
@@ -122,9 +119,18 @@ const ProductScreen = () => {
                                 className='btn-block' 
                                 type='button' 
                                 disabled={product.countInStock === 0}>
+                               
+
                                     Add To Cart
+                          
                                 </Button>
+                                <Card>
+
+                                <Link className='btn' to='/'>KEEP SHOPPING</Link>
+                                </Card>
+                               
                             </ListGroup.Item>
+                            
                         </ListGroup>
                     </Card>
                 </Col>
