@@ -16,6 +16,9 @@ import {
     PRODUCT_UPDATE_SUCCESS,
     PRODUCT_UPDATE_FAIL,
     PRODUCT_UPDATE_RESET,
+    PRODUCT_TOP_SUCCESS,
+    PRODUCT_TOP_FAIL,
+    PRODUCT_TOP_REQUEST,
   } from '../constants/productConstants';
   
 //This defines a Redux reducer productListReducer that manages the state of a product list by handling different action types like request, success, and fail, with default values set to an empty products array and updating the state accordingly.
@@ -95,6 +98,21 @@ export const productDetailsReducer = (state = { product: {reviews: []} }, action
         return { loading: false, error: action.payload }
       case PRODUCT_UPDATE_RESET:
         return { product: {} }
+      default:
+        return state
+    }
+  }
+
+
+  export const productTopRatedReducer = (state = { product: [] }, action) => {
+    switch (action.type) {
+      case PRODUCT_TOP_REQUEST:
+        return { loading: true, products: []}
+      case PRODUCT_TOP_SUCCESS:
+        return { loading: false, products: action.payload }
+      case PRODUCT_TOP_FAIL:
+        return { loading: false, error: action.payload }
+      
       default:
         return state
     }
