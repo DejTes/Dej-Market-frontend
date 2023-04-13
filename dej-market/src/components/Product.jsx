@@ -5,31 +5,31 @@ import Rating from './Rating'
 
 
 const Product = ({ product}) => {
-  console.log(product);
+ 
   return (
     <Card className='my-3 p-3 rounded'>
       <Link to={`/product/${product._id}`}>
         <Card.Img src={product.image} variant='top' /></Link>
         
-       {/* <Card.Text as='h5'>{product.category}</Card.Text> */}
         <Card.Body>
         <Link to={`/product/${product._id}`}>
           <Card.Title as='div'>
-            <strong>{product.name}</strong>
+            <strong>{product.name}</strong> <br />
+            <strong>{product.category}</strong>
           </Card.Title>
         </Link>
 
         <Card.Text as='div'>
           <Rating
-          value={product.rating}
-            text={`${product.numOfReviews} reviews`}
+          // value={product.rating}
+          //   text={`${product.numOfReviews} reviews`}
             
           />
-          <div className='my-3'>
+          {/* <div className='my-3'>
             {product.rating} from {product.numOfReviews} reviews
-          </div>
+          </div> */}
+           
         </Card.Text>
-
         <Card.Text as='h4'>${product.price}</Card.Text>
       </Card.Body>
 

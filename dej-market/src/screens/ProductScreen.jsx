@@ -50,7 +50,7 @@ const ProductScreen = () => {
                         <ListGroup.Item>
                             <Rating 
                                 value={product.rating}
-                                text={`${product.numReviews} reviews`}               
+                                text={`${product.numOfReviews} reviews`}               
                             />
                         </ListGroup.Item>
 

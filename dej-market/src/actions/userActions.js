@@ -214,8 +214,8 @@ export const getUserDetails = (id) => async (dispatch, getState) => {
         },
       }
   
-      const { data } = await axios.get(`/api/users`,config)
-      // const { data } = await axios.get(`http://localhost:8000/api/users`, config)
+      //const { data } = await axios.get(`/api/users`,config)
+      const { data } = await axios.get(`http://localhost:8000/api/users`, config)
   
       dispatch({
         type: USER_LIST_SUCCESS,

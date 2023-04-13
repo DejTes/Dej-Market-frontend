@@ -118,6 +118,7 @@ const CartScreen = () => {
 
                     <Link className='btn' to='/'>KEEP SHOPPING</Link>
                     </ListGroup.Item>
+                    {/* <Link className='btn' to='/order'>my orders</Link> */}
                    
                 </ListGroup>
             </Card>
