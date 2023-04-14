@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState, useEffect } from 'react'
 import { useNavigate, useParams} from "react-router-dom"
 import { Link } from 'react-router-dom'
@@ -8,7 +9,6 @@ import Loader from '../components/Loader'
 import FormContainer from '../components/FormContainer'
 import {listProductDetails, updateProduct} from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
-import { USER_UPDATE_RESET } from '../constants/userConstants'
 
 const ProductEditScreen = ({ match }) => {
   // const userId = match.params.id
@@ -22,6 +22,7 @@ const ProductEditScreen = ({ match }) => {
   const [category, setCategory] = useState('')
   const [countInStock, setCountInStock] = useState(0)
   const [description, setDescription] = useState('')
+  const [uploading, setUploading] = useState(false)
   
 
   const dispatch = useDispatch()
@@ -42,6 +43,7 @@ const ProductEditScreen = ({ match }) => {
     } else {
         if (!product.name || product._id !== productId) {
             // dispatch(getUserDetails(productId))
+            dispatch(listProductDetails(productId))
           } else {
             setName(product.name)
             setPrice(product.price)
@@ -56,6 +58,31 @@ const ProductEditScreen = ({ match }) => {
     
   }, [dispatch, navigate, productId, product, successUpdate])
 
+  
+  const uploadFileHandler = async (e) => {
+    const file = e.target.files[0]
+    const formData = new FormData()
+    formData.append('image', file)
+    setUploading(true)
+
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      }
+
+      const { data } = await axios.post('/api/upload', formData, config)
+
+      setImage(data)
+      setUploading(false)
+    } catch (error) {
+      console.error(error)
+      setUploading(false)
+    }
+  }
+
+
   const submitHandler = (e) => {
     e.preventDefault()
     dispatch(updateProduct({  _id: productId,
@@ -69,6 +96,8 @@ const ProductEditScreen = ({ match }) => {
     }))
   }
 
+
+  
   return (
     <>
       <Link to='/admin/productlist' className='btn btn-light my-3'>
@@ -112,13 +141,17 @@ const ProductEditScreen = ({ match }) => {
                 value={image}
                 onChange={(e) => setImage(e.target.value)}
               ></Form.Control>
-              {/* <Form.File
+
+
+               {/* <Form.File
                 id='image-file'
                 label='Choose File'
                 custom
                 onChange={uploadFileHandler}
               ></Form.File>
-              {uploading && <Loader />} */}
+              {uploading && <Loader />} 
+  */}
+
             </Form.Group>
 
             <Form.Group controlId='brand'>
