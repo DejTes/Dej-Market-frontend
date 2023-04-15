@@ -25,7 +25,7 @@ const HomeScreen = ({ match }) => {
     <>
       <Hero />
       {!keyword && <NewProductCarousel />}
-      <h1>All Products</h1>
+      <h1 style={{textAlign: 'center', marginTop: '30px'}}>All Products</h1>
       {loading ? (
         <Loader />
       ) : error ? (

@@ -18,6 +18,8 @@ import UserEditScreen from "./screens/UserEditScreen";
 import ProductListScreen from "./screens/ProductListScreen";
 import ProductEditScreen from "./screens/ProductEditScreen";
 import OrderListScreen from "./screens/OrderListScreen";
+import About from './components/About'
+
 
 import "./App.css";
 import "./index.css";
@@ -31,6 +33,8 @@ const App = () => {
           <main className="py-4">
             <Container>
               <Routes>
+              <Route path='about' element={<About />} />
+           
                 <Route path="/order/:id" element={<OrderScreen />} />
                 <Route path="/shipping" element={<ShippingScreen />} />
                 <Route path="/payment" element={<PaymentScreen />} />

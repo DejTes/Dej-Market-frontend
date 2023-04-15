@@ -11,11 +11,6 @@ const Services = () => {
             <h3 className="text-primary text-center">
               Laptops <br /> Based on your choice
             </h3>
-            <p className="text-center">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Saepe
-              dolorum debitis consectetur reprehenderit non aliquam voluptates
-              dolore aut vero consequuntur.
-            </p>
           </Col>
         </Row>
 

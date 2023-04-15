@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Carousel, Image } from 'react-bootstrap'
+import { Carousel, Image, Container,Row, Col } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from './Loader'
 import Message from './Message'
@@ -23,11 +23,15 @@ const NewProductCarousel = () => {
   ) : error ? (
     <Message variant='danger'>{error}</Message>
   ) : (
+  
+    
+   
+   
     <Carousel pause='hover' className='bg-dark'>
       {products.map((product) => (
        
         <Carousel.Item key={product._id}>
-          <h1>New Products</h1>
+           <h1 style={{textAlign: 'center'}}>New Products</h1>
           <Link to={`/product/${product._id}`}>
             <Image src={product.image} alt={product.name} fluid />
             <Carousel.Caption className='carousel-caption'>
@@ -40,6 +44,8 @@ const NewProductCarousel = () => {
       ))}
     </Carousel>
   )
+
+  
 }
 
 export default NewProductCarousel
