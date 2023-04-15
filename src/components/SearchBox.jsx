@@ -16,17 +16,28 @@ const SearchBox = () => {
   };
 
   return (
-    <Form onSubmit={submitHandler} className="d-inline">
-      <Form.Control
-        type="text"
-        name="q"
-        onChange={(e) => setKeyword(e.target.value)}
-        placeholder="Search Products..."
-        className="mr-sm-2 ml-sm-5"
-      ></Form.Control>
-      <Button type="submit" variant="outline-success" className="p-2">
-        Search
-      </Button>
+    <Form onSubmit={submitHandler} className="d-inline search-form">
+      <div className="d-flex flex-row">
+        <div className="mr-2">
+          <Form.Control
+            type="text"
+            name="q"
+            onChange={(e) => setKeyword(e.target.value)}
+            placeholder="Search Products..."
+            className="search-input"
+            style={{ width: "400px" }} // set the width of the search field to 400px
+          />
+        </div>
+        <div>
+          <Button
+            type="submit"
+            variant="outline-success"
+            className="p-2 search-btn"
+          >
+            Search
+          </Button>
+        </div>
+      </div>
     </Form>
   );
 };

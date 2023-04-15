@@ -1,7 +1,6 @@
-
-import React from 'react';
-import { Row, Col, Container } from 'react-bootstrap';
-import { services } from '../utils/constants';
+import React from "react";
+import { Row, Col, Container } from "react-bootstrap";
+import { services } from "../utils/constants";
 
 const Services = () => {
   return (
@@ -19,15 +18,22 @@ const Services = () => {
             </p>
           </Col>
         </Row>
+
         <Row>
           {services.map((service) => {
             const { id, icon, title, text } = service;
             return (
-              <Col md={4} key={id}>
-                <div className="service bg-primary p-4 rounded mb-4">
-                  <span className="icon">{icon}</span>
-                  <h4 className="text-white">{title}</h4>
-                  <p className="text-white">{text}</p>
+              <Col md={4} key={id} className="mb-4">
+                <div className="service bg-primary p-4 rounded h-100 d-flex flex-column align-items-center justify-content-center">
+                  <span className="icon d-flex align-items-center justify-content-center">
+                    {React.cloneElement(icon, {
+                      style: { fontSize: "40px", color: "#fff" },
+                    })}
+                  </span>
+                  <div className="mt-4 text-center">
+                    <h4 className="text-white mb-3">{title}</h4>
+                    <p className="text-white">{text}</p>
+                  </div>
                 </div>
               </Col>
             );

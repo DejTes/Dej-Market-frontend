@@ -2,7 +2,7 @@
 import React from 'react';
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
-import heroBcg from '../assets/heroBcg.jpeg'
+import front from '../assets/front.jpg'
 import '../index.css';
 
 const Hero = () => {
@@ -22,7 +22,7 @@ const Hero = () => {
           </Link>
         </Col>
         <Col xs={12} md={5} >
-          <img src={heroBcg} className="main-img" />
+          <img src={front} className="main-img" />
         </Col>
       </Row>
     </Container>

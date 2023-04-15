@@ -11,10 +11,11 @@ import {listProductDetails, updateProduct} from '../actions/productActions'
 import { PRODUCT_UPDATE_RESET } from '../constants/productConstants'
 
 const ProductEditScreen = ({ match }) => {
-  // const userId = match.params.id
+
   const { id: productId } = useParams()
   const navigate = useNavigate()
 
+  
   const [name, setName] = useState('')
   const [price, setPrice] = useState(0)
   const [image, setImage] = useState('')
@@ -39,11 +40,15 @@ const ProductEditScreen = ({ match }) => {
   
     if (successUpdate) {
         dispatch({type: PRODUCT_UPDATE_RESET})
-        navigate('/admin/productlist')
+        navigate('/api/admin/productlist')
     } else {
-        if (!product.name || product._id !== productId) {
-            // dispatch(getUserDetails(productId))
+        if (!product || !product.name || (productId && product._id !== productId)) {
+          if (productId) {
+           
             dispatch(listProductDetails(productId))
+          } else {
+            console.error('ProductId is undefined');
+          }
           } else {
             setName(product.name)
             setPrice(product.price)
@@ -59,28 +64,51 @@ const ProductEditScreen = ({ match }) => {
   }, [dispatch, navigate, productId, product, successUpdate])
 
   
-  const uploadFileHandler = async (e) => {
-    const file = e.target.files[0]
-    const formData = new FormData()
-    formData.append('image', file)
-    setUploading(true)
+  // const uploadFileHandler = async (e) => {
+  //   const file = e.target.files[0]
+  //   const formData = new FormData()
+  //   formData.append('image', file)
+  //   setUploading(true)
 
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'multipart/form-data',
-        },
+  //   try {
+  //     const config = {
+  //       headers: {
+  //         'Content-Type': 'multipart/form-data',
+  //       },
+  //     }
+
+  //     const { data } = await axios.post('/api/upload', formData, config)
+
+  //     setImage(data)
+  //     setUploading(false)
+  //   } catch (error) {
+  //     console.error(error)
+  //     setUploading(false)
+  //   }
+  // }
+
+
+
+
+const handleFileUpload = async (file) => {
+  const formData = new FormData();
+  formData.append('image', file);
+
+  try {
+    const { data } = await axios.post('/api/upload', formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
       }
-
-      const { data } = await axios.post('/api/upload', formData, config)
-
-      setImage(data)
-      setUploading(false)
-    } catch (error) {
-      console.error(error)
-      setUploading(false)
-    }
+    });
+    return data.imageUrl;
+  } catch (error) {
+    console.error(error);
+    
   }
+};
+
+
+
 
 
   const submitHandler = (e) => {
@@ -143,14 +171,17 @@ const ProductEditScreen = ({ match }) => {
               ></Form.Control>
 
 
-               {/* <Form.File
-                id='image-file'
-                label='Choose File'
-                custom
-                onChange={uploadFileHandler}
-              ></Form.File>
-              {uploading && <Loader />} 
-  */}
+{uploading && <Loader />}
+  <input
+  type="file"
+  accept="image/*"
+  onChange={(e) => {
+    const file = e.target.files[0];
+    handleFileUpload(file).then((imageUrl) => {
+      setImage(imageUrl);
+    });
+  }}
+/>
 
             </Form.Group>
 
