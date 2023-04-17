@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Form, Button, Row, Col } from "react-bootstrap";
+import { Form, Button, Row, Col, Card } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -44,6 +44,8 @@ const RegisterScreen = ({ location }) => {
 
   return (
     <FormContainer>
+      <Card className="shadow">
+      <Card.Body>
       <h1>Sign Up</h1>
       {message && <Message variant="danger">{message}</Message>}
       {error && <Message variant="danger">{error}</Message>}
@@ -102,6 +104,8 @@ const RegisterScreen = ({ location }) => {
           </Link>
         </Col>
       </Row>
+      </Card.Body>
+      </Card>
     </FormContainer>
   );
 };

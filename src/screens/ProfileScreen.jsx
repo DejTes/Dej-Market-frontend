@@ -8,6 +8,7 @@ import Message from '../components/Message'
 import Loader from '../components/Loader'
 import { getUserDetails, updateUserProfile } from '../actions/userActions'
 import { listMyOrders } from '../actions/orderActions'
+import { USER_UPDATE_PROFILE_RESET } from '../constants/userConstants'
 
 const ProfileScreen = ({location}) => {
   const [name, setName] = useState('')
@@ -62,7 +63,7 @@ const ProfileScreen = ({location}) => {
       navigate('/login')
     } else {
       if (!user || !user.name || success) {
-        // dispatch({ type: USER_UPDATE_PROFILE_RESET })
+        dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails('profile'))
         dispatch(listMyOrders())
       } else {
@@ -91,7 +92,7 @@ const ProfileScreen = ({location}) => {
       {message && <Message variant='danger'>{message}</Message>}
       {error && <Message variant='danger'>{error}</Message>}
       {success && <Message variant='success'>Profile Updated</Message>}
-      {loading && <Loader />}
+      {/* {loading && <Loader />} */}
         <Form onSubmit={submitHandler}>
             <Form.Group controlId='name'>
               <Form.Label>Name</Form.Label>
@@ -146,7 +147,7 @@ const ProfileScreen = ({location}) => {
         {loadingOrders ? (
           <Loader />
         ) : errorOrders ? (
-          <Message variant='danger'>{errorOrders}</Message>
+          <Message >{errorOrders}</Message>
         ) : (
           <Table striped bordered hover responsive className='table-sm'>
             <thead>
