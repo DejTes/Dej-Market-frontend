@@ -63,6 +63,7 @@ const ProfileScreen = ({location}) => {
       navigate('/login')
     } else {
       if (!user || !user.name || success) {
+        
         dispatch({ type: USER_UPDATE_PROFILE_RESET })
         dispatch(getUserDetails('profile'))
         dispatch(listMyOrders())
